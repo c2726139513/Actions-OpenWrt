@@ -83,11 +83,7 @@ jobs:
         $GITHUB_WORKSPACE/$DIY_P2_SH
 
     - name: SSH connection to Actions
-      run: |
-        # 下载 bore 二进制文件
-        curl -sL https://github.com/ekzhang/bore/releases/download/v0.5.0/bore-v0.5.0-x86_64-unknown-linux-musl.tar.gz | tar -xz
-        # 启动隧道，将 Runner 的 22 端口映射到 bore.pub
-        ./bore local 22 --to bore.pub
+      uses: owenthereal/action-upterm@v2
       if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
 
     - name: Download package
